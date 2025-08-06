@@ -29,6 +29,9 @@ export class Tab1Page implements OnInit {
 
   async ngOnInit() {
     this.session = await this.sessionVault.getSession();
+    if (!this.session) {
+      this.navController.navigateRoot('/login');
+    }
   }
 
   async logout(): Promise<void> {
