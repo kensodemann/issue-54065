@@ -13,7 +13,7 @@ export class AuthenticationService {
   }
 
   async login(): Promise<void> {
-    this.sessionVault.storeSession({
+    await this.sessionVault.storeSession({
       email: 'test@ionic.io',
       firstName: 'Tessa',
       lastName: 'Testsmith',
@@ -23,6 +23,7 @@ export class AuthenticationService {
   }
 
   async logout(): Promise<void> {
-    this.sessionVault.clearSession();
+    await this.sessionVault.clearSession();
+    await this.sessionVault.updateUnlockMode('InMemory');
   }
 }

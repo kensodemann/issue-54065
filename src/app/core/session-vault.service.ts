@@ -32,13 +32,13 @@ export class SessionVaultService {
     try {
       await this.vault.initialize({
         key: 'io.ionic.gettingstartediv',
-        type: VaultType.SecureStorage,
+        type: VaultType.InMemory,
         deviceSecurityType: DeviceSecurityType.None,
-        lockAfterBackgrounded: 2000,
       });
-    } catch {
+    } catch (err: unknown) {
+      alert(JSON.stringify(err));
       await this.vault.clear();
-      await this.updateUnlockMode('SecureStorage');
+      await this.updateUnlockMode('InMemory');
     }
 
     this.vault.onLock(() => this.lockedSubject.next(true));

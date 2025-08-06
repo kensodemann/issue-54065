@@ -36,12 +36,12 @@ export class Tab1Page implements OnInit {
     this.navController.navigateRoot('/');
   }
 
-  async changeUnlockMode(mode: UnlockMode) {
-    await this.sessionVault.updateUnlockMode(mode);
-  }
-
   async lock(): Promise<void> {
     this.session = null;
     await this.sessionVault.lock();
+  }
+
+  async unlock(): Promise<void> {
+    this.session = await this.sessionVault.getSession();
   }
 }
