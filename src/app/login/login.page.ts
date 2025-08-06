@@ -11,7 +11,6 @@ import {
   NavController,
 } from '@ionic/angular/standalone';
 import { AuthenticationService } from '../core/authentication.service';
-import { SessionVaultService } from '../core/session-vault.service';
 
 @Component({
   selector: 'app-login',
@@ -22,12 +21,10 @@ import { SessionVaultService } from '../core/session-vault.service';
 export class LoginPage {
   private navController = inject(NavController);
   private authentication = inject(AuthenticationService);
-  private vault = inject(SessionVaultService);
 
   async login() {
     try {
       await this.authentication.login();
-      await this.vault.updateUnlockMode('BiometricsWithPasscode');
       this.navController.navigateRoot(['tabs', 'tab1']);
     } catch (err: unknown) {
       alert(JSON.stringify(err));
